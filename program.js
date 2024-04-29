@@ -40,7 +40,7 @@ function game(){
             }else{
                 console.log('You have no weapon! - no points');
             }
-            console.log('masz ' + playerPoints + ' punktow, przeciwnik ma ' + computerPoints + ' punktow');
+            console.log('You have ' + playerPoints + ' points, Your opponent has ' + computerPoints + ' points');
         }
     if(playerPoints>computerPoints){                                        // game() returns result
         return console.log('Player won');
