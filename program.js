@@ -1,6 +1,6 @@
 
 
-function game(){
+/*function game(){
 
     let playerPoints = 0;
     let computerPoints =0;
@@ -25,12 +25,12 @@ function game(){
             return 'player wins! '+ playerSelection+ ' beat '+ computerSelection;
         }else{
             computerPoints=computerPoints +1;
-            return 'computer wins '+ computerSelection+ ' beat '+ playerSelection;
+            return 'computer wins: '+ computerSelection+ ' beat '+ playerSelection;
         }
     }
     
-        for( let i=1;i<=5;i++){                                                 // five rounds loop
-            console.log('round ' + i+'/5');
+        //for( let i=1;i<=5;i++){                                                 // five rounds loop - commented out acc to exercise description
+            //console.log('round ' + i+'/5');                                       // "i" variable from for loop is not recognizeable because commented out by //
             let playerSelection = getPlayerChoice();
             let computerSelection = getComputerChoice();
 
@@ -41,18 +41,38 @@ function game(){
                 console.log('You have no weapon! - no points');
             }
             console.log('You have ' + playerPoints + ' points, Your opponent has ' + computerPoints + ' points');
-        }
-    if(playerPoints>computerPoints){                                        // game() returns result
+       // }
+    if((playerPoints>=5)&&(playerPoints>computerPoints)){                                        
         return console.log('Player won');
-    }else if (playerPoints<computerPoints){
+    }else if ((playerPoints<computerPoints)&&(computerPoints>=5)){
         return console.log('Computer won');
-    }else
-        return console.log('Draw');
+    }else if ((playerPoints===5)&&(computerPoints===5)){
+        return console.log('Draw');}
    
 
 }
 
-game();
+game(); // game() returns result but only from first round because there is no repeat game logic. Maybe after implementing buttons and eventListeners it will be clearer how to change this issue
+
+*/
+const startGame = document.querySelector("#startGame");
+startGame.addEventListener('click', game);
+
+
+
+
+function game(){
+const weaponSelectorContainer = document.querySelector("#weapon_selector_container");
+const chooseWeaponTitle = document.createElement("h2");
+chooseWeaponTitle.textContent = "Choose your weapon: ";
+weaponSelectorContainer.appendChild(chooseWeaponTitle);
+
+let playerPoints = 0;
+let computerPoints = 0;
+
+
+
+}//end of game function
 
 
 
@@ -73,11 +93,7 @@ game();
 
 
 
-
-
-
-
-// let weaponArray=['rock','paper','scissors'];            //tablica z ktorej komputer i gracz wybieraja bron
+/*let weaponArray=['rock','paper','scissors'];            //tablica z ktorej komputer i gracz wybieraja bron
 
 
 // let computer = weaponArray[Math.floor(Math.random()*3)];             // komputer losuje swoja bron z tablicy
@@ -104,4 +120,4 @@ game();
 //     console.log('player choosed: ' + player);
 //     console.log('PLAYER WON!');
 //     console.log('play again - press: F5');
-// }
+// }*/
