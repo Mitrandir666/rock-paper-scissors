@@ -1,78 +1,85 @@
 
 
-/*function game(){
-
-    let playerPoints = 0;
-    let computerPoints =0;
-
-    function getComputerChoice(){                                               // randomly taking weapon name from an array by computerplayer
-        let weaponArray = ['rock', 'paper', 'scissors'];
-        return weaponArray[Math.floor(Math.random()*3)]; 
-    }
-    
-    function getPlayerChoice(){                                                 // player chooses his weapon
-        let weaponArray = ['rock', 'paper', 'scissors'];
-        return weaponArray[prompt('0 = rock, 1 = paper, 2 = scissors. Chose Your weapon wisely: ')];
-    }   
-
-    function playRound(playerSelection, computerSelection){                     //function compares players and computers weapons and calculate the verdict.
-        if (playerSelection===computerSelection){
-            playerPoints=playerPoints + 1;
-            computerPoints=computerPoints +1;
-            return 'DRAW! ' + playerSelection +' is equal ' + computerSelection;
-        }else if ((playerSelection==='rock' && computerSelection==='scissors')||(playerSelection==='paper' && computerSelection==='rock')||(playerSelection==='scissors' && computerSelection==='paper')){
-            playerPoints=playerPoints +1;
-            return 'player wins! '+ playerSelection+ ' beat '+ computerSelection;
-        }else{
-            computerPoints=computerPoints +1;
-            return 'computer wins: '+ computerSelection+ ' beat '+ playerSelection;
-        }
-    }
-    
-        //for( let i=1;i<=5;i++){                                                 // five rounds loop - commented out acc to exercise description
-            //console.log('round ' + i+'/5');                                       // "i" variable from for loop is not recognizeable because commented out by //
-            let playerSelection = getPlayerChoice();
-            let computerSelection = getComputerChoice();
-
-            if (playerSelection!=undefined){
-                console.log(playRound(playerSelection, computerSelection));
-                console.log(playerPoints + ' ' + computerPoints);
-            }else{
-                console.log('You have no weapon! - no points');
-            }
-            console.log('You have ' + playerPoints + ' points, Your opponent has ' + computerPoints + ' points');
-       // }
-    if((playerPoints>=5)&&(playerPoints>computerPoints)){                                        
-        return console.log('Player won');
-    }else if ((playerPoints<computerPoints)&&(computerPoints>=5)){
-        return console.log('Computer won');
-    }else if ((playerPoints===5)&&(computerPoints===5)){
-        return console.log('Draw');}
-   
-
-}
-
-game(); // game() returns result but only from first round because there is no repeat game logic. Maybe after implementing buttons and eventListeners it will be clearer how to change this issue
-
-*/
-const startGame = document.querySelector("#startGame");
-startGame.addEventListener('click', game);
-
-
-
-
-function game(){
-const weaponSelectorContainer = document.querySelector("#weapon_selector_container");
-const chooseWeaponTitle = document.createElement("h2");
-chooseWeaponTitle.textContent = "Choose your weapon: ";
-weaponSelectorContainer.appendChild(chooseWeaponTitle);
 
 let playerPoints = 0;
 let computerPoints = 0;
 
+const startGame = document.querySelector("#startGame");
+startGame.addEventListener('click', game);
 
 
-}//end of game function
+   
+  
+ 
+    function game(){
+    
+        let computerWeapon; /*tu wstaw funcje wyboru broni przez komputer - mozliwe ze trzeba te zmienna przeniesc gdzies nizej zeby zadzialala w odpowiednim momencie*/
+        let playerWeapon; /* tu wstaw funkcje wyboru broni przez gracza - uwaga na widzialnosc zdarzen i zmiennych - mozliwe ze trzeba te zmienna przeniesc nizej aby zadzialala w odpowiednim momencie*/
+        const body = document.querySelector("body");
+        const weaponSelectorContainer = document.querySelector("#weapon_selector_container");
+        const chooseWeaponTitle = document.createElement("h2");
+        chooseWeaponTitle.textContent = "Choose your weapon: ";
+        weaponSelectorContainer.appendChild(chooseWeaponTitle);
+        body.removeChild(startGame);
+
+        //attaching button ROCK
+        const rockButton = document.createElement("button");
+        rockButton.id = "rockButton";
+        rockButton.textContent = "ROCK";
+        weaponSelectorContainer.appendChild(rockButton);
+
+        //attaching button scissors
+        const scissorsButton = document.createElement("button");
+        scissorsButton.id = "scissorsButton";
+        scissorsButton.textContent = "SCISSORS";
+        weaponSelectorContainer.appendChild(scissorsButton);
+
+        //attaching button paper
+        const paperButton = document.createElement("button");
+        paperButton.id = "paperButton";
+        paperButton.textContent = "PAPER";
+        weaponSelectorContainer.appendChild(paperButton);
+
+        //eventlistener for rockButton and its function
+        rockButton.addEventListener('click', rockWeaponSelection);
+        
+        //eventlistener for scissorsButton and its function
+        scissorsButton.addEventListener('click', scissorsWeaponSelection);
+        
+        //eventlistener for paperButton and its function
+        paperButton.addEventListener('click', paperWeaponSelection);
+        
+
+    };//end of game function
+
+    //functions for weaponButtons - player selection
+    function rockWeaponSelection(){
+        playerWeapon = "rock";
+        console.log(playerWeapon);
+        computerWeapon = computerSelection();
+        console.log(computerWeapon);
+        document.querySelector("#weapon_selector_container").remove();//tuuuuuuuuuuuuuuu
+    };
+    function scissorsWeaponSelection(){
+        playerWeapon = "scissors";
+        console.log(playerWeapon);
+        computerWeapon = computerSelection();
+        console.log(computerWeapon);
+        document.querySelector("#weapon_selector_container").remove();
+    };
+    function paperWeaponSelection(){
+        playerWeapon = "paper";
+        console.log(playerWeapon);
+        computerWeapon=computerSelection();
+        console.log(computerWeapon);
+        document.querySelector("#weapon_selector_container").remove();
+    };
+
+    //function body where computer is choosing its weapon
+    function computerSelection(){
+        let computerWeaponArray=["rock","paper","scissors"];
+        return computerWeaponArray[Math.floor(Math.random()*3)];
+    }
 
 
 
@@ -89,35 +96,3 @@ let computerPoints = 0;
 
 
 
-
-
-
-
-/*let weaponArray=['rock','paper','scissors'];            //tablica z ktorej komputer i gracz wybieraja bron
-
-
-// let computer = weaponArray[Math.floor(Math.random()*3)];             // komputer losuje swoja bron z tablicy
-//     console.log(computer);
-
-// let player = weaponArray[prompt('0 = rock, 1 = paper, 2 = scissors. Choose Your weapon wisely: ')]; // gracz wybiera bron z tablicy
-//     console.log(player);
-
-// //draw
-// if (computer === player){
-//     console.log('computer choosed: ' + computer);
-//     console.log('player choosed: ' + player);
-//     console.log('DRAW');
-//     console.log('play again - press: F5');
-// //computer    
-// }    else if((computer==='scissors' && player==='paper') || (computer==='rock' && player==='scissors') || (computer==='paper' && player==='rock')){
-//     console.log('computer choosed: ' + computer);
-//     console.log('player choosed: ' + player);
-//     console.log('COMPUTER WON!');
-//     console.log('play again - press: F5');
-// //player    
-// }   else{
-//     console.log('computer choosed: ' + computer);
-//     console.log('player choosed: ' + player);
-//     console.log('PLAYER WON!');
-//     console.log('play again - press: F5');
-// }*/
